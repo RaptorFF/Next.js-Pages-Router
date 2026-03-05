@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 function Cabin() {
@@ -5,9 +6,14 @@ function Cabin() {
   const { cabinId } = router.query;
 
   return (
-    <div>
-      <h1>Cabin #{cabinId}</h1>
-    </div>
+    <>
+    <Head>
+        <title>Cabin #{cabinId} - The Wild Oasis</title>
+    </Head>
+      <div>
+        <h1>Cabin #{cabinId}</h1>
+      </div>
+    </>
   );
 }
 
