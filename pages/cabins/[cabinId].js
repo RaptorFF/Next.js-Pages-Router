@@ -1,17 +1,29 @@
+import CabinView from "@/components/CabinView";
+import { getCabin } from "@/lib/data-service";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-function Cabin() {
-  const router = useRouter();
-  const { cabinId } = router.query;
+//Server-side rendered (SSR) - Dynamiclly generated on each request, based on the URL parameter (cabinId)
+export async function getServerSideProps({ params }) {
+  const cabin = await getCabin(params.cabinId);
+  return {
+    props: {
+      cabin,
+    },
+  };
+}
+
+function Cabin({ cabin }) {
+  // const router = useRouter();
+  // const { cabinId } = router.query;
 
   return (
     <>
-    <Head>
-        <title>Cabin #{cabinId} - The Wild Oasis</title>
-    </Head>
-      <div>
-        <h1>Cabin #{cabinId}</h1>
+      <Head>
+        <title>Cabin {cabin.name} - The Wild Oasis</title>
+      </Head>
+      <div className="max-w-6xl mx-auto mt-8">
+        <CabinView cabin={cabin} />
       </div>
     </>
   );

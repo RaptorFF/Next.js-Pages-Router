@@ -1,18 +1,18 @@
 import CabinList from "@/components/CabinList";
 import { getCabins } from "@/lib/data-service";
 
-//Staticly generated (SSG)
+//Staticly generated (SSG) with Incremental Static Regeneration (ISR) - Generated at build time, but can be re-generated in the background when there are requests to this page, based on the revalidate time (3600 seconds = 1 hour).
 export async function getStaticProps() {
   const cabins = await getCabins();
   return {
     props: {
       cabins,
     },
+    revalidate: 3600, // (ISR) Regenerate the page every hour (3600 seconds) if there are requests to this page. This way we keep the data up-to-date without having to rebuild the entire app for every change in the data.
   };
 }
 
 export default function Cabins({ cabins }) {
-  console.log(cabins);
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
