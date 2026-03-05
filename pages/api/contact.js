@@ -8,12 +8,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const contactData = {
-    full_name: "Fikos",
-    email: "test@example.com",
-    subject: "Booking",
-    message: "HEY THERE",
-  };
+  const contactData = JSON.parse(req.body);
 
   const { error } = await supabase.from("contacts").insert(contactData);
 
